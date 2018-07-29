@@ -1,0 +1,51 @@
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace CleanConnect.Common.Model.Errors
+{
+    /// <summary>
+    /// A collection of validation errors.
+    /// </summary>
+    public class Validations
+    {
+        private readonly IList<ClientError> _clientErrors = new List<ClientError>();
+
+        /// <summary>
+        /// Add a new error to the collection.
+        /// </summary>
+        /// <param name="code"></param>
+        /// <param name="message"></param>
+        public void AddError(ErrorCode code, string message)
+        {
+            _clientErrors.Add(new ClientError(code,message));
+        }
+
+        /// <summary>
+        /// Read only list of the errors.
+        /// </summary>
+        public IEnumerable<ClientError> Errors => _clientErrors;
+
+        /// <summary>
+        /// The number of errors.
+        /// </summary>
+        public int Count => _clientErrors.Count;
+
+        /// <summary>
+        /// Add the list of errors to this validation object.
+        /// Typically used when merging the parent and child object errors.
+        /// </summary>
+        /// <param name="Errors"></param>
+        public void Add(IEnumerable<ClientError> Errors)
+        {
+            foreach (var error  in Errors)
+            {
+                _clientErrors.Add(error);
+            }
+        }
+
+        public bool Contains(ErrorCode errorCode)
+        {
+            return _clientErrors.Any(x => x.ErrorCode == errorCode);
+        }
+    }
+}

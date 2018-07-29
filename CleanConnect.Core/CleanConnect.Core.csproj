@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CleanConnect.Common\CleanConnect.Common.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Marten" Version="2.9.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.1.1" />
+  </ItemGroup>
+</Project>
