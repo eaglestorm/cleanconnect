@@ -12,12 +12,12 @@ namespace CleanConnect.Common.Model
         /// <summary>
         /// Readable name
         /// </summary>
-        private readonly string _name;
+        public string Name { get;  }
         
         /// <summary>
         /// Internal value
         /// </summary>
-        private readonly int _value;
+        public int Value { get; }
 
         /// <summary>
         /// create the type safe enum.
@@ -26,13 +26,13 @@ namespace CleanConnect.Common.Model
         /// <param name="name"></param>
         protected TypeSafeEnum(int value, string name)
         {
-            _name = name;
-            _value = value;
+            Name = name;
+            Value = value;
         }
 
         public override string ToString()
         {
-            return _name;
+            return Name;
         }
     }
 }

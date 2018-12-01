@@ -19,6 +19,17 @@ namespace CleanConnect.Common.Model.Errors
         {
             _clientErrors.Add(new ClientError(code,message));
         }
+        
+        /// <summary>
+        /// Add a new error related to the given property.
+        /// </summary>
+        /// <param name="code"></param>
+        /// <param name="message"></param>
+        /// <param name="property"></param>
+        public void AddError(ErrorCode code, string message, string property)
+        {
+            _clientErrors.Add(new ClientError(code,message,property));
+        }
 
         /// <summary>
         /// Read only list of the errors.
@@ -46,6 +57,11 @@ namespace CleanConnect.Common.Model.Errors
         public bool Contains(ErrorCode errorCode)
         {
             return _clientErrors.Any(x => x.ErrorCode == errorCode);
+        }
+
+        public ClientError FirstOrDefault()
+        {
+            return _clientErrors.FirstOrDefault();
         }
     }
 }

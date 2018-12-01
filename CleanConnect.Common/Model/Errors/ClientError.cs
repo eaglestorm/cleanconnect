@@ -16,6 +16,12 @@
             ErrorCode = errorCode;
             Message = message;
         }
+
+        public ClientError(ErrorCode errorCode, string message, string property)
+        :this(errorCode, message)
+        {
+            Property = property;
+        }
         
         /// <summary>
         /// The error code for this error.
@@ -28,5 +34,13 @@
         /// Mostly for developers and generally shouldn't be displayed to the user.
         /// </summary>
         public string Message { get; }
+        
+        /// <summary>
+        /// The field or property that the error relates to. 
+        /// </summary>
+        /// <remarks>
+        /// This should be the same as the name of the property on the Dto.
+        /// </remarks>
+        public string Property { get; }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using CleanConnect.Common.Model.Errors;
 using CleanConnect.Core.Model;
 using CleanConnect.Core.Model.Authorization;
+using CleanConnect.Core.Model.Client;
 using Xunit;
 
 namespace CleanConnect.Core.Test.Model
@@ -120,7 +121,7 @@ namespace CleanConnect.Core.Test.Model
         
         private Client GetClient()
         {
-            return new Client(Guid.NewGuid(), Secret, new List<string>()
+            return new Client(Guid.NewGuid(), "TestClient" ,Secret, new List<string>()
             {
                 Redirect
             });

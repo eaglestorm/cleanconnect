@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using CleanConnect.Common.Model.Errors;
 using CleanConnect.Core.Model;
+using CleanConnect.Core.Model.Client;
 using Xunit;
 
 namespace CleanConnect.Core.Test.Model
@@ -19,7 +20,7 @@ namespace CleanConnect.Core.Test.Model
         [Fact]
         public void ValidClientTest()
         {
-            var client = new Client(_clientGuid, ClientSecret, _clientUris);
+            var client = new Client(_clientGuid, "TestClient", ClientSecret, _clientUris);
             Assert.Equal(_clientGuid, client.Id);
             Assert.Equal(ClientSecret, client.Secret);
             Assert.Equal(_clientUris.Count, client.RedirectUris.Count);
@@ -28,19 +29,19 @@ namespace CleanConnect.Core.Test.Model
         [Fact]
         public void InvalidGuidThrows()
         {
-            Assert.Throws<CleanConnectException>(() => new Client(Guid.Empty, ClientSecret, _clientUris));
+            Assert.Throws<CleanConnectException>(() => new Client(Guid.Empty, "TestClient",ClientSecret, _clientUris));
         }
         
         [Fact]
         public void InvalidSecretThrows()
         {
-            Assert.Throws<CleanConnectException>(() => new Client(Guid.Empty, "", _clientUris));
+            Assert.Throws<CleanConnectException>(() => new Client(Guid.Empty, "TestClient","", _clientUris));
         }
         
         [Fact]
         public void InvalidUrlsThrows()
         {
-            Assert.Throws<CleanConnectException>(() => new Client(Guid.Empty, ClientSecret, new List<string>()));
+            Assert.Throws<CleanConnectException>(() => new Client(Guid.Empty, "TestClient",ClientSecret, new List<string>()));
         }
     }
 }

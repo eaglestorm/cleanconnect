@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using CleanConnect.Common.Model;
 using CleanConnect.Common.Model.Errors;
 
-namespace CleanConnect.Core.Model
+namespace CleanConnect.Core.Model.Client
 {
     public class Client
     {        
         public Client(
             Guid id,
+            string name,
             string secret,
             IList<string> redirectUris)
         {
             Id = id;
+            Name = name;
             Secret = secret;
             RedirectUris = redirectUris;
             IsValid();
@@ -22,7 +23,12 @@ namespace CleanConnect.Core.Model
         /// Client id
         /// </summary>
         public Guid Id { get; }
-        
+
+        /// <summary>
+        /// The name of the client.
+        /// </summary>
+        public string Name { get; }
+
         /// <summary>
         /// Client secret or password
         /// </summary>

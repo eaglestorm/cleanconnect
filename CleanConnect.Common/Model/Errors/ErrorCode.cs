@@ -25,7 +25,7 @@ namespace CleanConnect.Common.Model.Errors
         #endregion
 
         /// Errors that should not throw exceptions but be returned to the client as a validation response 400.
-        #region Validations
+        #region ASCII Validations
         
         public static readonly ErrorCode Required = new ErrorCode(ErrorGroup.Validation, 1, AsciiError.InvalidRequest, "A required value is missing.");
 
@@ -59,6 +59,43 @@ namespace CleanConnect.Common.Model.Errors
         /// </summary>
         public static readonly ErrorCode InvalidRedirectUri = new ErrorCode(ErrorGroup.Validation,106, AsciiError.InvalidRequest, "The redrect uri is not valid for the client.");
         
+        /// <summary>
+        /// Your access has been denied.
+        /// </summary>
+        public static readonly ErrorCode AccessDenied = new ErrorCode(ErrorGroup.Validation, 107, AsciiError.AccessDenied, "Access Denied");
+        
+        
+        public static readonly ErrorCode InvalidRequest = new ErrorCode(ErrorGroup.Validation, 108, AsciiError.InvalidRequest, "Invalid request");
+        
+
+        #endregion
+
+        //Errors not returned to the RP.
+        #region Authorisation Server Errors
+
+        public static readonly  ErrorCode InvalidMethodCall = new ErrorCode(ErrorGroup.General, 1, "This method call is not valid.");
+        
+        /// <summary>
+        /// A users password was attempted to be changed but the new password did not match the repeated password field.
+        /// </summary>
+        public static readonly ErrorCode PasswordsDifferent = new ErrorCode(ErrorGroup.Validation, 201, "The supplied passwords did not match.");
+        
+        /// <summary>
+        /// A user tried to change their password but the new password did not meet the password rules. 
+        /// </summary>
+        public static readonly ErrorCode PasswordInvalid = new ErrorCode(ErrorGroup.Validation, 202, "The supplied password does not meet password rules.");
+        
+        public static readonly ErrorCode InvalidUsername = new ErrorCode(ErrorGroup.Validation, 203, "The supplied username is not valid.");
+        
+        public static readonly ErrorCode InvalidName = new ErrorCode(ErrorGroup.Validation, 204, "A string contains invalid data.");
+        
+        public static readonly ErrorCode InvalidDate = new ErrorCode(ErrorGroup.Validation, 204, "A date is not valid.");
+        
+        public static readonly ErrorCode InvalidEmail = new ErrorCode(ErrorGroup.Validation, 204, "The email address is not valid.");
+        
+        public static readonly ErrorCode InvalidPhone = new ErrorCode(ErrorGroup.Validation, 204, "The phone number is not valid.");
+        
+        public static readonly ErrorCode ValueRequired = new ErrorCode(ErrorGroup.Validation, 205, "The phone number is not valid.");
 
         #endregion
 
@@ -77,6 +114,22 @@ namespace CleanConnect.Common.Model.Errors
             string message)
         {
             AsciiCode = asciiCode;
+            Message = message;
+            _group = group;
+            _number = number;
+        }
+        
+        /// <summary>
+        /// Errors that are not required by the open id spec and hence not returned to the RP, i.e. password validation errors.
+        /// </summary>
+        /// <param name="group"></param>
+        /// <param name="number"></param>
+        /// <param name="message"></param>
+        public ErrorCode(
+            ErrorGroup @group,
+            int number,
+            string message)
+        {
             Message = message;
             _group = group;
             _number = number;

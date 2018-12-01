@@ -36,7 +36,7 @@ namespace CleanConnect.Core.Model.Authorization
         public bool CanShowLoginAndConsent()
         {
             return _prompts.Contains(Prompt.None);
-        }
+        }        
         
         /// <summary>
         /// set the prompts given the space delimitted string.

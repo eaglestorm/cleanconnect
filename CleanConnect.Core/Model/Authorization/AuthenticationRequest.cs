@@ -22,9 +22,9 @@ namespace CleanConnect.Core.Model.Authorization
         /// <param name="scopes"></param>
         /// <param name="responseType"></param>
         /// <param name="client"></param>
-        /// <param name="redirectUri"></param>
+        /// <param name="redirectUri">requested redirect uri</param>
         /// <param name="state"></param>
-        public AuthenticationRequest(string scopes, ResponseType responseType,Client client, string redirectUri, string state)
+        public AuthenticationRequest(string scopes, ResponseType responseType,Client.Client client, string redirectUri, string state)
         {
             Scopes = new ScopesRequest(scopes);
             if (!Scopes.IsValid())
@@ -57,7 +57,7 @@ namespace CleanConnect.Core.Model.Authorization
         /// <param name="maxAge"></param>
         /// <param name="locales"></param>
         /// <param name="tokenHint"></param>
-        public AuthenticationRequest(string scopes, ResponseType responseType,Client client, string redirectUri, string state, string nonce, Display display,
+        public AuthenticationRequest(string scopes, ResponseType responseType,Client.Client client, string redirectUri, string state, string nonce, Display display,
             Prompts prompts, DateTimeOffset maxAge, IList<CultureInfo> locales, string tokenHint)
         :this(scopes,responseType,client,redirectUri,state)
         {
@@ -82,7 +82,7 @@ namespace CleanConnect.Core.Model.Authorization
         /// <summary>
         /// The client
         /// </summary>
-        public Client Client { get; }
+        public Client.Client Client { get; }
         
         /// <summary>
         /// The requested redirecct uri.
@@ -185,11 +185,12 @@ namespace CleanConnect.Core.Model.Authorization
                 }
                 catch (CultureNotFoundException ex)
                 {
+                    //TODO: logging via a service.
                     _validations.AddError(ErrorCode.InvalidLocale, $"{loc} is not recognized as a valid locale.");
                 }
                 
             }
-        }
+        }        
 
         /// <summary>
         /// returns true if the request allows the end user to be authenticated.
@@ -202,5 +203,10 @@ namespace CleanConnect.Core.Model.Authorization
         }
 
         public Validations Errors => _validations;
+
+        public bool LoginRequired()
+        {
+            return Prompts.CanShowLoginAndConsent();
+        }
     }
 }

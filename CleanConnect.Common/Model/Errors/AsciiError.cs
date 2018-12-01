@@ -1,7 +1,7 @@
 ﻿namespace CleanConnect.Common.Model.Errors
 {
     /// <summary>
-    /// Errors reeturned to the client that are compliant with the spec but not very helpful.
+    /// Errors reeturned to the client that are compliant with the spec.
     /// </summary>
     /// <remarks>
     /// These are the external errors where as the error code is the internal error that is logged.
