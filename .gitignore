@@ -2,3 +2,8 @@
 .idea
 **/bin
 **/obj
+**/wwwroot
+
+#files
+**/*.user
+**/*.dll
