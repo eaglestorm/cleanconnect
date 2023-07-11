@@ -10,7 +10,7 @@
           <Version>2.1.2</Version>
         </PackageReference>
         <PackageReference Include="Microsoft.AspNetCore.Identity">
-          <Version>2.1.6</Version>
+          <Version>2.1.39</Version>
         </PackageReference>
     </ItemGroup>
 
